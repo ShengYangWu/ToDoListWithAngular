@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>ToDoList</title>
+  <link href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="mycss.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+</head>
+<body ng-controller="MainCtrl">
+  <div>
+    <div id="title">
+      <h1>ToDoList</h1>
+    </div>
+    
+    <div id="navbar-container" class="container">
+      <nav id="navbar">
+        <ul id="navbar-list">
+          <li class="active">ALL</li>
+          <li>PENDING</li>
+          <li>DONE</li>
+          <li>ADD</li>
+        </ul>
+      </nav>
+    </div>
+    
+    <div id="content-contanier" class="container">
+      <div id="content-all" >
+        <ul id="content-all-list" >
+          <li class="{{$index+1}}" ng-repeat= "item in todoList | filter:{isD:false}"><p>{{item.title}}</p><div class="btn-group"><div class="btn trash"><i class="fa fa-trash" aria-hidden="true" ng-click="removeItem($index, item)"></i></div>
+            <div class="btn edit"><i class="fa fa-pencil" aria-hidden="true"></i></div></div></li>
+          
+        </ul>
+      </div>
+      <div id="content-pending" class="disappear">
+        <ul id="content-pending-list">
+          <li class="{{$index+1}}" ng-repeat= "item in todoList | filter:{isD:false}"><p>{{item.title}}</p><div class="btn-group"><div class="btn done">Done?</div></div></li>
+         
+        </ui>
+      </div>
+      <div id="content-done" class="disappear">
+        <ul id="content-done-list">
+          <!--<li class="3"><p>Meeting</p><div class="btn-group"><div class="btn notDone">Not Done?</div></div></li>-->
+        </ul>
+      </div>
+      <div id="content-add" class="disappear">
+        <div id="create-form-container" >
+          <form id="create-form" ng-submit="add()">
+            <input id="todo_input" class="input_style" name="text" type="text" placeholder="do something?" ng-model="newItem"/>
+            <input id="todo_submit" class="submit_style" name="submit" type="submit" value="Submit">
+          </form>
+        </div>
+        <div id="update-form-container" class="disappear2">
+          <form id="update-form">
+            <input id="todo_update_id" type="hidden">
+            <input id="todo_update" class="input_style" type="text"/>
+            <input id="submit_update" class="submit_style" type="submit" name="submit" value="Update">
+          </form>
+        </div>
+      </div>
+    </div>
+
+    
+  </div>
+  <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+  <script src='myjs.js'></script>
+</body>
+</html>
