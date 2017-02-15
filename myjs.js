@@ -1,22 +1,26 @@
+var counter = 4;
 function MainCtrl($scope) {
-  $scope.todoList = [{title:"Do Homework", isD:false}, {title:"Go Sleep", isD:false}, {title:"Meeting", isD:false}];
-  $scope.pendingList = [{title:"Do Homework", isD:false}, {title:"Go Sleep", isD:false}];
+  $scope.todoList = [{title:"Do Homework", isD:false, isDone:false, num:1}, {title:"Go Sleep", isD:false, isDone:false, num:2}, {title:"Meeting", isD:false, isDone:true, num:3}];
   $scope.add = function() {
     if (this.newItem) {
       //join to all
-      this.todoList.push({title:this.newItem, isD:false});
-      //join to pending
-      this.pendingList.push({title:this.newItem, isD:false});
+      this.todoList.push({title:this.newItem, isD:false, isDone:false, num:counter});
+      counter+=1;
       this.newItem = "";
     }
   }
-  $scope.removeItem = function(index, item){
+  $scope.removeItem = function(item){
     item.isD = true;
-    index+=1;
-    $('.' + index).remove();
+  }
+    $scope.movetoDone = function(item){
+    item.isDone = true;
+  }
+  $scope.movetoPending = function(item){
+    alert(item.num);
+    item.isDone = false;
   }
 };
-var counter = 4;
+
 var addAndRemoveClass = function() {
   var div = $('#content-contanier div');
   var choose = $(this).index() + 1;
@@ -29,10 +33,10 @@ var addAndRemoveClass = function() {
 };
 $('#navbar-list li').click(addAndRemoveClass);
 
-$('#content-all').on('click', '.trash', function(){
+/*$('#content-all').on('click', '.trash', function(){
   var id = $(this).parent().parent().attr('class');
   $('.' + id).remove();
-})
+})*/
 
 $('#content-all').on('click', '.edit', function(){
   $('#content-all').addClass('disappear');
@@ -46,21 +50,21 @@ $('#content-all').on('click', '.edit', function(){
 })
 
 $('#content-pending').on('click', '.done', function(){
-  $(this).parent().parent().remove();
-  var string = $(this).parent().parent().children('p').text();
-  var id = $(this).parent().parent().attr('class');
+  //$(this).parent().parent().remove();
+  //var string = $(this).parent().parent().children('p').text();
+  //var id = $(this).parent().parent().attr('class');
   //join to done
-  $('#content-done-list').append('<li class="' + id + '"><p>' + string + 
-              '</p><div class="btn-group"><div class="btn notDone">Not Done?</div></div></li>');
+  //$('#content-done-list').append('<li class="' + id + '"><p>' + string + 
+              //'</p><div class="btn-group"><div class="btn notDone">Not Done?</div></div></li>');
 });
 
 $('#content-done').on('click', '.notDone', function(){
-  $(this).parent().parent().remove();
-  var string = $(this).parent().parent().children('p').text();
-  var id = $(this).parent().parent().attr('class');
+  //$(this).parent().parent().remove();
+  //var string = $(this).parent().parent().children('p').text();
+  //var id = $(this).parent().parent().attr('class');
   //join to pending
-  $('#content-pending-list').append('<li class="' + id + '"><p>' + string + 
-              '</p><div class="btn-group"><div class="btn done">Done?</div></div></li>');
+  //$('#content-pending-list').append('<li class="' + id + '"><p>' + string + 
+              //'</p><div class="btn-group"><div class="btn done">Done?</div></div></li>');
 });
                     
 $('#create-form').submit(function(event){
@@ -74,9 +78,9 @@ $('#create-form').submit(function(event){
   //join to pending
   //$('#content-pending-list').append(new_pending);
   
-  $('#todo_input').val("");
-  counter+=1;
-  event.preventDefault();
+  //$('#todo_input').val("");
+  //counter+=1;
+  //event.preventDefault();
 });
 
 $('#update-form').submit(function(event){
@@ -85,4 +89,3 @@ $('#update-form').submit(function(event){
   $('.' + id).children('p').text(update_input);
   event.preventDefault();
 });
-

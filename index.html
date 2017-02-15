@@ -28,20 +28,20 @@
     <div id="content-contanier" class="container">
       <div id="content-all" >
         <ul id="content-all-list" >
-          <li class="{{$index+1}}" ng-repeat= "item in todoList | filter:{isD:false}"><p>{{item.title}}</p><div class="btn-group"><div class="btn trash"><i class="fa fa-trash" aria-hidden="true" ng-click="removeItem($index, item)"></i></div>
+          <li class="{{item.num}}" ng-repeat= "item in todoList | filter:{isD:false}"><p>{{item.title}}</p><div class="btn-group"><div class="btn trash"><i class="fa fa-trash" aria-hidden="true" ng-click="removeItem(item)"></i></div>
             <div class="btn edit"><i class="fa fa-pencil" aria-hidden="true"></i></div></div></li>
           
         </ul>
       </div>
       <div id="content-pending" class="disappear">
         <ul id="content-pending-list">
-          <li class="{{$index+1}}" ng-repeat= "item in todoList | filter:{isD:false}"><p>{{item.title}}</p><div class="btn-group"><div class="btn done">Done?</div></div></li>
+          <li class="{{item.num}}" ng-repeat= "item in todoList | filter:{isD:false} | filter:{isDone:false}"><p>{{item.title}}</p><div class="btn-group"><div class="btn done" ng-click="movetoDone(item)">Done?</div></div></li>
          
         </ui>
       </div>
       <div id="content-done" class="disappear">
         <ul id="content-done-list">
-          <!--<li class="3"><p>Meeting</p><div class="btn-group"><div class="btn notDone">Not Done?</div></div></li>-->
+            <li class="{{item.num}}" ng-repeat= "item in todoList | filter:{isD:false} | filter:{isDone:true}"><p>{{item.title}}</p><div class="btn-group"><div class="btn notDone" ng-click="movetoPending(item)">Not Done?</div></div></li>
         </ul>
       </div>
       <div id="content-add" class="disappear">
