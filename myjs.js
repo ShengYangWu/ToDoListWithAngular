@@ -16,7 +16,6 @@ function MainCtrl($scope) {
     item.isDone = true;
   }
   $scope.movetoPending = function(item){
-    alert(item.num);
     item.isDone = false;
   }
 };
@@ -68,9 +67,9 @@ $('#content-done').on('click', '.notDone', function(){
 });
                     
 $('#create-form').submit(function(event){
-  var todo_input = $('#todo_input').val();
-  var new_todo = '<li class="' + counter + '"><p>' + todo_input + '</p><div class="btn-group"><div class="btn trash"><i class="fa fa-trash" aria-hidden="true"></i></div><div class="btn edit"><i class="fa fa-pencil" aria-hidden="true"></i></div></div></li>';
-  var new_pending = '<li class="' + counter + '"><p>' + todo_input + '</p><div class="btn-group"><div class="btn done">Done?</div></div></li>';
+  //var todo_input = $('#todo_input').val();
+  //var new_todo = '<li class="' + counter + '"><p>' + todo_input + '</p><div class="btn-group"><div class="btn trash"><i class="fa fa-trash" aria-hidden="true"></i></div><div class="btn edit"><i class="fa fa-pencil" aria-hidden="true"></i></div></div></li>';
+  //var new_pending = '<li class="' + counter + '"><p>' + todo_input + '</p><div class="btn-group"><div class="btn done">Done?</div></div></li>';
 
   //join to all
   //$('#content-all-list').append(new_todo);
